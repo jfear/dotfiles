@@ -1,7 +1,7 @@
 #!/usr/bin/env fish
-set -Ua fish_user_paths $HOME/.cargo/bin
 
-curl -sL https://github.com/rust-analyzer/rust-analyzer/releases/latest/download/rust-analyzer-x86_64-unknown-linux-gnu.gz |
-	gunzip -c - >/tmp/rust-analyzer
-chmod +x /tmp/rust-analyzer
-mv -f /tmp/rust-analyzer $HOME/.cargo/bin/rust-analyzer
+if ! test -e $HOME/.cargo
+	curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | bash -s -- -q -y --no-modify-path
+
+end
+set -ga fish_user_paths $HOME/.cargo/bin
