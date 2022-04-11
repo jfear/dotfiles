@@ -1,5 +1,6 @@
 # Inserts a blank line between shell prompts
 add_newline = true
+right_format = """$time$username$hostname"""
 
 # Replace the "❯" symbol in the prompt with "➜"
 [character]
@@ -11,6 +12,7 @@ vicmd_symbol = "[⮬](bold yellow)"
 disabled = true
 
 [directory]
+truncation_length = 4
 truncation_symbol = "…/"
 
 [git_branch]
@@ -21,3 +23,15 @@ truncation_symbol = "…"
 [memory_usage]
 disabled = false
 style = "bold dimmed yellow"
+
+[username]
+format = "[$user@]($style)"
+style_user = "bold dimmed green"
+
+[hostname]
+format = "[$hostname]($style)"
+style = "bold dimmed green"
+
+[time]
+disabled = false
+format = '🕙[ $time ]($style)'
