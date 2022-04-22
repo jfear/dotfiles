@@ -1,5 +1,3 @@
-#!/usr/bin/env fish
-
 function clipboad_copy -d "Copy /dev/stdin to clipboard"
     set -el fun_input
     if isatty stdin
