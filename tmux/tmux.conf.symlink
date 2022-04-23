@@ -1,0 +1,84 @@
+# ===============
+# Install Plugins
+# ===============
+set -g @plugin 'tmux-plugins/tpm'
+set -g @plugin 'tmux-plugins/tmux-sensible'
+set -g @plugin 'tmux-plugins/tmux-pain-control'
+set -g @plugin 'tmux-plugins/tmux-resurrect'
+set -g @plugin 'tmux-plugins/tmux-continuum'
+set -g @plugin 'tmux-plugins/tmux-yank'
+set -g @plugin 'jimeh/tmux-themepack'
+set -g @themepack 'powerline/default/yellow'
+run -b '~/.tmux/plugins/tpm/tpm'
+
+# ================
+# General Settings
+# ================
+
+set -s escape-time 0
+
+# terminal color
+set -g default-terminal "xterm-256color"
+set -ga terminal-overrides ",*256col*:Tc"
+setenv -g COLORTERM truecolor
+
+# turn on mouse
+setw -g mouse on
+
+# fix SSH agent after reconnecting
+# see also ssh/rc
+# https://blog.testdouble.com/posts/2016-11-18-reconciling-tmux-and-ssh-agent-forwarding/
+set -g update-environment "DISPLAY SSH_ASKPASS SSH_AGENT_PID SSH_CONNECTION WINDOWID XAUTHORITY"
+setenv -g SSH_AUTH_SOCK $HOME/.ssh/ssh_auth_sock
+
+# Start windows and panes index at 1, not 0.
+set -g base-index 1
+setw -g pane-base-index 1
+
+# Ensure window index numbers get reordered on delete.
+set-option -g renumber-windows on
+
+# set terminal title
+set-option -g set-titles on
+set-option -g set-titles-string "#S / #W"
+
+# auto rename tmux window to current cwd
+set-option -g status-interval 1
+set-option -g automatic-rename on
+set-option -g automatic-rename-format '#{b:pane_current_path}'
+
+# ===========
+# Keybindings
+# ===========
+
+# Change prefix to space
+unbind C-b
+set -g prefix C-Space
+set -g xterm-keys on
+
+# Use vi keybindings
+set-window-option -g mode-keys vi
+
+# vim-mode copy/paste
+bind-key -T copy-mode-vi v send-keys -X begin-selection
+bind-key -T copy-mode-vi y send-keys -X copy-selection
+bind-key -T copy-mode-vi r send-keys -X rectangle-toggle
+
+# open windows et al in the same folder
+bind '"' split-window -c "#{pane_current_path}"
+bind % split-window -h -c "#{pane_current_path}"
+bind c new-window -c "#{pane_current_path}"
+
+# vim-like pane switching
+bind -r ^ last-window
+bind -r k select-pane -U
+bind -r j select-pane -D
+bind -r h select-pane -L
+bind -r l select-pane -R
+bind r source-file ~/.tmux.conf
+
+# ==============
+# Local Settings
+# ==============
+
+source-file -q ~/.tmux-local.conf
