@@ -3,7 +3,7 @@ set -Ux EDITOR vim
 set -Ux VISUAL $EDITOR
 set -Ux WEDITOR code
 
-fish_add_path -mgp $DOTFILES_ROOT/bin $HOME/.bin $HOME/.local/bin
+fish_add_path -mgp $HOME/.local/bin
 set -U fish_key_bindings fish_vi_key_bindings
 
 
