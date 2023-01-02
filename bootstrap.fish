@@ -121,6 +121,10 @@ mkdir -p ~/.config/fish/completions/
 	and success 'completions'
 	or abort 'completions'
 
+if test ! -d ~/.local/bin
+	mkdir -p ~/.local/bin
+end
+
 for installer in */install.fish
 	$installer
 		and success $installer
