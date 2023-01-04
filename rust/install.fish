@@ -25,10 +25,6 @@ if ! test -e ~/.cargo/bin/fd
 	cargo install -q fd-find
 end
 
-if ! test -e ~/.cargo/bin/fzf
-	cargo install -q fzf
-end
-
 if ! test -e ~/.cargo/bin/git-cliff
 	cargo install -q git-cliff
 end

@@ -1,4 +1,4 @@
-#!/usr/bin/fish
+#!/usr/bin/env fish
 
 if test ! -d ~/.fonts
     mkdir -p ~/.fonts
