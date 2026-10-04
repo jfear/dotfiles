@@ -1,0 +1,21 @@
+# Source global definitions
+if [ -f /etc/bashrc ]; then
+    . /etc/bashrc
+fi
+
+# Source every *.sh snippet in the given directory, in sort order.
+_source_dir() {
+    [ -d "$1" ] || return 0
+    local rc
+    for rc in "$1"/*.sh; do
+        [ -f "$rc" ] && . "$rc"
+    done
+}
+
+# Machine/user config, in numeric order: 00-helpers, 10-env, 20-functions...
+_source_dir "$HOME/.config/bash"
+
+# Local overrides that you don't track in your dotfiles repo
+_source_dir "$HOME/.bashrc.d"
+
+unset -f _source_dir
