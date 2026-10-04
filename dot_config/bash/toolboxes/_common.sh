@@ -7,6 +7,10 @@ install_dependencies() {
     [ -f /.first_run ] || sudo dnf -y install "$@"
 }
 
+enable_copr() {
+    [ -f /.first_run ] || sudo dnf copr enable -y "$@"
+}
+
 # expose <cmd> — make a host command (e.g. flatpak) callable from inside
 # this toolbox via flatpak-spawn. [from the article]
 expose() {
